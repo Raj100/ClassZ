@@ -1,5 +1,5 @@
 const express = require("express")
-const cors = require("cors")
+// const cors = require("cors")
 const mongoose = require("mongoose")
 const dotenv = require("dotenv")
 // const bodyParser = require("body-parser")
@@ -15,10 +15,10 @@ dotenv.config();
 //
 
 app.use(express.json({ limit: '10mb' }))
-app.use(cors())
-app.use(cors({
-    origin: 'https://mern-project-frontend-seven.vercel.app'
-  }));
+// app.use(cors())
+// app.use(cors({
+//     origin: 'https://mern-project-frontend-seven.vercel.app'
+//   }));
 
 app.use(function (request, response, next) {
     response.header("Access-Control-Allow-Origin", "*");
