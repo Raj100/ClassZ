@@ -1,5 +1,5 @@
 const express = require("express")
-// const cors = require("cors")
+const cors = require("cors")
 const mongoose = require("mongoose")
 const dotenv = require("dotenv")
 // const bodyParser = require("body-parser")
@@ -15,16 +15,18 @@ dotenv.config();
 //
 
 app.use(express.json({ limit: '10mb' }))
-// app.use(cors())
-// app.use(cors({
-//     origin: 'https://mern-project-frontend-seven.vercel.app'
-//   }));
+app.use(cors())
+app.use(cors({
+    origin: 'https://mern-project-frontend-seven.vercel.app',
+    credentials: true,
+    methods: ['GET','POST','HEAD','PUT','PATCH','DELETE']
+  }));
 
-app.use(function (request, response, next) {
-    response.header("Access-Control-Allow-Origin", "*");
-    response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-  });
+// app.use(function (request, response, next) {
+//     response.header("Access-Control-Allow-Origin", "*");
+//     response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     next();
+//   });
 mongoose
     .connect(process.env.MONGO_URL, {
         useNewUrlParser: true,
