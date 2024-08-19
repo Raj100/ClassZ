@@ -20,6 +20,11 @@ app.use(cors({
     origin: 'https://mern-project-frontend-seven.vercel.app'
   }));
 
+app.use(function (request, response, next) {
+    response.header("Access-Control-Allow-Origin", "*");
+    response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
 mongoose
     .connect(process.env.MONGO_URL, {
         useNewUrlParser: true,
