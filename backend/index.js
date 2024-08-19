@@ -27,6 +27,12 @@ mongoose
 
 app.use('/', Routes);
 
+//for texting
+app.use('/', (req,res,next)=>{
+    res.send("server is running");   
+});
+
+
 app.listen(PORT, () => {
     console.log(`Server started at port no. ${PORT}`)
 })
