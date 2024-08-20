@@ -15,30 +15,8 @@ dotenv.config();
 //
 
 app.use(express.json({ limit: '10mb' }))
-const whitelist = [
-  '*'
-];
 
-app.use((req, res, next) => {
-  const origin = req.get('referer');
-  const isWhitelisted = whitelist.find((w) => origin && origin.includes(w));
-  if (isWhitelisted) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,Content-Type,Authorization');
-    res.setHeader('Access-Control-Allow-Credentials', true);
-  }
-  // Pass to next layer of middleware
-  if (req.method === 'OPTIONS') res.sendStatus(200);
-  else next();
-});
-
-
-app.use(function (request, response, next) {
-    response.header("Access-Control-Allow-Origin", "*");
-    response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-  });
+app.use(cors());
 
   mongoose
   .connect(process.env.MONGO_URL, {
