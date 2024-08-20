@@ -18,17 +18,17 @@ app.use(express.json({ limit: '10mb' }))
 
 app.use(cors());
 
-  mongoose
-  .connect(process.env.MONGO_URL, {
+mongoose
+.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     serverSelectionTimeoutMS: 5000, // Timeout after 5 seconds instead of waiting indefinitely
-  })
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((err) => {
+})
+.then(() => console.log("Connected to MongoDB"))
+.catch((err) => {
     console.error("MongoDB connection error:", err);
     process.exit(1); // Exit the process with an error code if the connection fails
-  });
+});
 
 
 app.use('/', Routes);
