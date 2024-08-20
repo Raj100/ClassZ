@@ -39,6 +39,7 @@ app.use(function (request, response, next) {
     response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
   });
+
   mongoose
   .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
@@ -46,7 +47,10 @@ app.use(function (request, response, next) {
     serverSelectionTimeoutMS: 5000, // Timeout after 5 seconds instead of waiting indefinitely
   })
   .then(() => console.log("Connected to MongoDB"))
-  .catch((err) => console.log("NOT CONNECTED TO NETWORK", err));
+  .catch((err) => {
+    console.error("MongoDB connection error:", err);
+    process.exit(1); // Exit the process with an error code if the connection fails
+  });
 
 
 app.use('/', Routes);
